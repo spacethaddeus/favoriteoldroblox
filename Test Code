@@ -1,21 +1,52 @@
-<?php
-	if (isset($_POST['csrf']) && isset($_POST['username']) $$ isset($_POST['password'])) {
-		if ($_POST['csrf'] != security::getCSRF()) die("error");
-		
-		// Query to check if user exists and to get user password and to compare that
-		$stmt = $GLOBALS['dbcon']->prepare("SELECT * FROM users WHERE username = :username;");
-		$stmt->bindParam(':username', $_POST['username'], PDO::PARAM_STR); 
-		$stmt->execute();
-		$result = $stmt->fetch(PDO::FETCH_ASSOC);
-		
-		if ($stmt->rowCount() == 0) die("no-user");
-		if (crypt($_POST['password'], $result['password_salt']) != $result['password_hash']) {
-			die("invalid-password");
-		}else{
-			$sessionId = cryptLib::generateRandomString(256);
-			setcookie("session_id", $sessionId, time() + (86400 * 30), "/", ".your.domain", false, true);
-			
-			// Insert session into session table and keep checking for it
-		}
-	}
+<div align="center">
+        <div style="width:800px;height:800px;border:1px solid #000;">
+        <div class="alltext" style="font-weight: 400; box-shadow: 0px 0px; 0px; 0px;">
+<div class="allthetext"><h1><b>Welcome to Dynoblox!</b></h1>
+        <p>Welcome to Dynoblox. We're still in development so please wait for the game to be out!</p>
+<hr>
+    <center>
+
+
+    <h1>We are also accepting ads for our sites!</h1>
+    <h3>Email us at <a href="mailto:dynoblox.corporation@gmail.com">dynoblox.corporation@gmail.com</a> to submit.</h3>
+</center></div>
+</div>
+</div>
+<br>
+<div class="site-footer">
+<div style="padding-top:15px;">
+<div class="center-align">
+<img src="/MainLogo.jpg" height="150" width="150">
+<div style="padding:4px 0;font-size:18px;color:white;font-weight:300;">© 2017 Dynoblox.</div>
+<div style="padding-top:5px;">
+<a href="http://www.dynoblox.cf/termsofservice.html" style="color:#30A9DE;font-size:16px;font-weight:500;">Terms of Service</a>&nbsp;&nbsp;&nbsp;
+<a href="http://www.dynoblox.cf/privacy.html" style="color:#30A9DE;font-size:16px;font-weight:500;">Privacy Policy</a>&nbsp;&nbsp;&nbsp;
+<a href="https://corp-dynoblox.bitballoon.com" style="color:#30A9DE;font-size:16px;font-weight:500;">About Us</a>&nbsp;&nbsp;&nbsp;
+<a href="https://goo.gl/forms/epQVvU7wpfXWgHSE2" target="_blank" style="color:#30A9DE;font-size:16px;font-weight:500;">Jobs</a>
+</div>
+</div>
+</div>
+</div>
+<br>
+<!--IP Ban System-->
+<script type="text/javascript" src="http://l2.io/ip.js?var=userip"></script>
+<script language="Javascript">
+function preloadFunc()
+{
+var ip = userip;
+var bannedips=[
+ "170.84.9.72",
+]
+var handleips=bannedips.join("|")
+handleips=new RegExp(handleips, "i")
+
+if (ip.search(handleips)!=-1){
+alert("This IP has been banned by the Dynoblox Moderation Team. To submit appeals, please contact us at dynoblox.corporation@gmail.com or (234)-221-2345. Thank you.")
+window.location.replace("http://www.dynoblox.cf/forbidden.html");
+document.write('<!--');
+}
+}
+window.onpaint = preloadFunc();
+</script>
+</div>
 ?>
